@@ -245,6 +245,10 @@ extension ElementView {
             element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant)).isActive = true
         }
         
+        if let widthToElement = element.proxy.widthToElement as? UIView {
+            element.widthAnchor.constraint(lessThanOrEqualTo: widthToElement.widthAnchor, multiplier: 1).isActive = true
+        }
+        
         if let heightConstant = element.proxy.heightToSet {
             let heightConstraint = element.heightAnchor.constraint(equalToConstant: CGFloat(heightConstant))
             heightConstraint.priority = .defaultHigh
@@ -258,6 +262,10 @@ extension ElementView {
         
         if let widthConstant = element.proxy.widthToSet {
             element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant)).isActive = true
+        }
+        
+        if let widthToElement = element.proxy.widthToElement as? UIView {
+            element.widthAnchor.constraint(lessThanOrEqualTo: widthToElement.widthAnchor, multiplier: 1).isActive = true
         }
         
         if let heightConstant = element.proxy.heightToSet {

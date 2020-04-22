@@ -25,6 +25,8 @@ open class BaseElementMaker<TElement: Element> {
     
     var widthConstant: Float?
     
+    var widthToElement: Element?
+    
     var heightConstant: Float?
     
     var tintColor: UIColor?
@@ -47,6 +49,11 @@ open class BaseElementMaker<TElement: Element> {
     
     public func width(_ widthConstant: Float) -> Self {
         self.widthConstant = widthConstant
+        return self
+    }
+    
+    public func width(toElement elemnt: Element) -> Self {
+        self.widthToElement = elemnt
         return self
     }
     
@@ -134,6 +141,8 @@ open class ElementMaker<TElement: ElementView & Element>: BaseElementMaker<TElem
         if let widthConstant = widthConstant {
             element.width = widthConstant
         }
+        
+        element.proxy.widthToElement = widthToElement
         
         if let heightConstant = heightConstant {
             element.height = heightConstant
