@@ -260,12 +260,15 @@ extension ElementView {
     
     private func setPins<TElement: ElementControl>(forElment element: TElement) {
         
-        if let widthConstant = element.proxy.widthToSet {
-            element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant)).isActive = true
-        }
-        
         if let widthToElement = element.proxy.widthToElement as? UIView {
-            element.widthAnchor.constraint(lessThanOrEqualTo: widthToElement.widthAnchor, multiplier: 1).isActive = true
+            if let widthConstant = element.proxy.widthToSet {
+                element.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(widthConstant)).isActive = true
+            }
+            element.widthAnchor.constraint(lessThanOrEqualTo: widthToElement.widthAnchor, multiplier: 1, constant: -(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)).isActive = true
+        } else {
+            if let widthConstant = element.proxy.widthToSet {
+                element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant)).isActive = true
+            }
         }
         
         if let heightConstant = element.proxy.heightToSet {
