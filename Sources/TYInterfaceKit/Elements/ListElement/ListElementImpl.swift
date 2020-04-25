@@ -164,22 +164,15 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             didHandleScrollToEnd = true
             doOnScrolledToEnd()
         }
-        saveOffset()
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         didHandleScrollToEnd = false
-        if configurator.axis == .vertical {
-            lastOffset = scrollView.contentOffset.y
-        }
     }
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             didHandleScrollToEnd = false
-        }
-        if configurator.axis == .vertical {
-            lastOffset = scrollView.contentOffset.y
         }
     }
     
@@ -192,6 +185,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     }
     
     private func reload(animated: Bool, oldItems: [TItem]?) {
+        saveOffset()
         if !animated {
             collectionView.reloadData()
         } else if let oldItems = oldItems {
