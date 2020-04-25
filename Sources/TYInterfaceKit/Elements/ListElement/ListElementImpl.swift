@@ -24,6 +24,8 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     
     private var didHandleScrollToEnd = false
     
+    private var lastOffset: CGFloat?
+    
     private var configurator: ListElementViewConfigurator
     
     public var insets: UIEdgeInsets = .zero {
@@ -162,15 +164,22 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             didHandleScrollToEnd = true
             doOnScrolledToEnd()
         }
+        saveOffset()
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         didHandleScrollToEnd = false
+        if configurator.axis == .vertical {
+            lastOffset = scrollView.contentOffset.y
+        }
     }
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             didHandleScrollToEnd = false
+        }
+        if configurator.axis == .vertical {
+            lastOffset = scrollView.contentOffset.y
         }
     }
     
@@ -199,9 +208,10 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             }
             reloadWithAnimation(deletedIndexPaths: deletedItems, insertedIndexPaths: insertedItems)
         } else {
-            self.collectionView.performUsingPresentationValues {
+            self.collectionView.performBatchUpdates( {
                 collectionView.reloadSections(IndexSet(integer: 0))
-            }
+            })
+            //self.collectionView.per
         }
     }
     
@@ -251,6 +261,14 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
         }
         
         setupCollectionView()
+    }
+    
+    private func saveOffset() {
+        if configurator.axis == .vertical {
+            lastOffset = collectionView.contentOffset.y
+        } else {
+            lastOffset = collectionView.contentOffset.x
+        }
     }
     
     private class CollectionViewAutoSizedCell: UICollectionViewCell {
