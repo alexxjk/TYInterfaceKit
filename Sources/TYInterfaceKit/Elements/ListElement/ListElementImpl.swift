@@ -208,10 +208,17 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             }
             reloadWithAnimation(deletedIndexPaths: deletedItems, insertedIndexPaths: insertedItems)
         } else {
-            self.collectionView.performBatchUpdates( {
-                collectionView.reloadSections(IndexSet(integer: 0))
-            })
-            //self.collectionView.per
+            #if os(OSX)
+                self.collectionView.performBatchUpdates({ [weak self] in
+                    self?.collectionView.reloadSections(IndexSet(integer: 0))
+                }) { _ in
+                    collectionView.contentOffset.y = lastOffset
+                }
+            #else
+                self.collectionView.performUsingPresentationValues { [weak self] in
+                    self?.collectionView.reloadSections(IndexSet(integer: 0))
+                }
+            #endif
         }
     }
     
