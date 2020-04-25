@@ -203,7 +203,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             reloadWithAnimation(deletedIndexPaths: deletedItems, insertedIndexPaths: insertedItems)
         } else {
             #if targetEnvironment(macCatalyst)
-                collectionView.reloadSections(IndexSet(integer: 0))
+                collectionView.reloadData()
 //                self.collectionView.performBatchUpdates({ [weak self] in
 //                    self?.collectionView.reloadSections(IndexSet(integer: 0))
 //                }) { [weak self] _ in
