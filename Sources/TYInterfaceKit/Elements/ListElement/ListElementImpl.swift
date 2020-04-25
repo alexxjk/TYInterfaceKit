@@ -212,7 +212,9 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
                 self.collectionView.performBatchUpdates({ [weak self] in
                     self?.collectionView.reloadSections(IndexSet(integer: 0))
                 }) { _ in
-                    collectionView.contentOffset.y = lastOffset
+                    if let lastOffset = lastOffset {
+                        collectionView.contentOffset.y = lastOffset
+                    }
                 }
             #else
                 self.collectionView.performUsingPresentationValues { [weak self] in
