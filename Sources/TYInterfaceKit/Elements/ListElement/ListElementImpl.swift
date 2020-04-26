@@ -71,6 +71,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
         let oldItems = items
         items = newItems
         reload(animated: animated, oldItems: animateOnReloading ? oldItems : nil)
+        didHandleScrollToEnd = false
     }
     
     public func scrollToTop() {
@@ -78,7 +79,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     }
     
     public func moveToLoadingState() {
-        didHandleScrollToEnd = false
+//        didHandleScrollToEnd = false
         isLoading = true
         reload(animated: true, oldItems: animateOnReloading ? [] : nil)
     }
