@@ -24,8 +24,6 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     
     private var didHandleScrollToEnd = false
     
-    private var lastOffset: CGFloat?
-    
     private var configurator: ListElementViewConfigurator
     
     public var insets: UIEdgeInsets = .zero {
@@ -186,7 +184,6 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     }
     
     private func reload(animated: Bool, oldItems: [TItem]?) {
-        saveOffset()
         if !animated {
             collectionView.reloadData()
         } else if let oldItems = oldItems {
@@ -203,16 +200,9 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             }
             reloadWithAnimation(deletedIndexPaths: deletedItems, insertedIndexPaths: insertedItems)
         } else {
-            #if targetEnvironment(macCatalyst)
-            collectionView.layoutIfNeeded()
-                collectionView.performUsingPresentationValues { [weak self] in
-                    self?.collectionView.reloadSections(IndexSet(integer: 0))
-                }
-            #else
-                collectionView.performUsingPresentationValues { [weak self] in
-                    self?.collectionView.reloadSections(IndexSet(integer: 0))
-                }
-            #endif
+            collectionView.performUsingPresentationValues { [weak self] in
+                self?.collectionView.reloadSections(IndexSet(integer: 0))
+            }
         }
     }
     
@@ -262,14 +252,6 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
         }
         
         setupCollectionView()
-    }
-    
-    private func saveOffset() {
-        if configurator.axis == .vertical {
-            lastOffset = collectionView.contentOffset.y
-        } else {
-            lastOffset = collectionView.contentOffset.x
-        }
     }
     
     private class CollectionViewAutoSizedCell: UICollectionViewCell {
@@ -413,12 +395,21 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             guard collectionView.frame.height > 0 else {
                 return nil
             }
+            #if targetEnvironment(macCatalyst)
+            layoutAttributes.bounds.size.width =
+                collectionView.frame.width -
+                sectionInset.left -
+                sectionInset.right -
+                collectionView.contentInset.left -
+                collectionView.contentInset.right - 1
+            #else
             layoutAttributes.bounds.size.width =
                 collectionView.frame.width -
                 sectionInset.left -
                 sectionInset.right -
                 collectionView.contentInset.left -
                 collectionView.contentInset.right - 0.5
+            #endif
             return layoutAttributes
         }
 
