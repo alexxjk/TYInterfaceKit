@@ -314,7 +314,7 @@ public struct CornerRadius {
     }
 }
 
-public class ElementViewConfigurator {
+open class ElementViewConfigurator {
     public var preservesSuperviewLayoutMargins: Bool = false
     
     public init(preservesSuperviewLayoutMargins: Bool = false) {
