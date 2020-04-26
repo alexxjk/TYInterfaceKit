@@ -204,6 +204,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             reloadWithAnimation(deletedIndexPaths: deletedItems, insertedIndexPaths: insertedItems)
         } else {
             #if targetEnvironment(macCatalyst)
+            collectionView.layoutIfNeeded()
                 collectionView.performUsingPresentationValues { [weak self] in
                     self?.collectionView.reloadSections(IndexSet(integer: 0))
                 }
