@@ -42,7 +42,7 @@ open class TextInputElementMakerBase<TElement: ElementView & TextInputElement>: 
     }
 }
 
-public class SinglelineTextInputElementMaker: TextInputElementMakerBase<TextInputElementImpl> {
+open class SinglelineTextInputElementMaker: TextInputElementMakerBase<TextInputElementImpl> {
     
     private var icon: UIImage?
     
@@ -66,6 +66,6 @@ public class SinglelineTextInputElementMaker: TextInputElementMakerBase<TextInpu
     }
 }
 
-public class MultilineTextInputElementMaker: TextInputElementMakerBase<MultilineTextInputElementImpl> {
+open class MultilineTextInputElementMaker: TextInputElementMakerBase<MultilineTextInputElementImpl> {
 }
 
