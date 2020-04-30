@@ -58,12 +58,6 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
         }
     }
     
-    public override var background: UIColor {
-        didSet {
-            field.backgroundColor = background
-        }
-    }
-    
     public var doOnValueChanged: (() -> Void)?
     
     public required init(configurator: ElementViewConfigurator) {
@@ -112,6 +106,7 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
         
         field.typingAttributes = textStyleFactory.lineBreakMode(.byWordWrapping).makeAttributes()
         field.tintColor = tintColor
+        field.backgroundColor = .clear
         addSubview(field)
         let fieldConstraints = [
             field.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
