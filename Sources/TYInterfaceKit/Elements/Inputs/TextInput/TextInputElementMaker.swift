@@ -32,7 +32,7 @@ open class TextInputElementMakerBase<TElement: ElementView & TextInputElement>: 
         return self
     }
     
-    public override func make() -> TElement {
+    open override func make() -> TElement {
         let element = super.make()
         element.placeholderText = placeholderText
         element.textStyleFactory = textStyleFactory
@@ -58,7 +58,7 @@ open class SinglelineTextInputElementMaker: TextInputElementMakerBase<TextInputE
         return self
     }
     
-    public override func make() -> TextInputElementImpl {
+    open override func make() -> TextInputElementImpl {
         let element = super.make()
         element.icon = icon
         element.clearButtonIcon = clearIcon
