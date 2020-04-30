@@ -58,6 +58,12 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
         }
     }
     
+    public override var background: UIColor {
+        didSet {
+            field.backgroundColor = background
+        }
+    }
+    
     public var doOnValueChanged: (() -> Void)?
     
     public required init(configurator: ElementViewConfigurator) {
