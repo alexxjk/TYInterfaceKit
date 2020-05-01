@@ -247,7 +247,7 @@ extension ElementView {
             }
             let widthConstant = CGFloat(element.proxy.widthToElementOffset ?? Float(-(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)))
             element.widthAnchor.constraint(
-                lessThanOrEqualTo: widthToElement.widthAnchor,
+                equalTo: widthToElement.widthAnchor,
                 multiplier: CGFloat(element.proxy.widthToElementMultiplier ?? 1),
                 constant: widthConstant
             ).isActive = true
@@ -274,7 +274,7 @@ extension ElementView {
             }
             let widthConstant = CGFloat(element.proxy.widthToElementOffset ?? Float(-(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)))
             element.widthAnchor.constraint(
-                lessThanOrEqualTo: widthToElement.widthAnchor,
+                equalTo: widthToElement.widthAnchor,
                 multiplier: CGFloat(element.proxy.widthToElementMultiplier ?? 1),
                 constant: widthConstant
             ).isActive = true
