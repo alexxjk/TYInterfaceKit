@@ -23,6 +23,8 @@ final class ElementViewProxy {
     var widthToSet: Float?
     
     var widthToElement: Element?
+    var widthToElementMultiplier: Float?
+    var widthToElementOffset: Float?
     
     var heightToSet: Float?
     

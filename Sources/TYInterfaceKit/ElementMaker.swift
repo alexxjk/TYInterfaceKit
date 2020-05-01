@@ -26,6 +26,8 @@ open class BaseElementMaker<TElement: Element> {
     var widthConstant: Float?
     
     var widthToElement: Element?
+    var widthToElementMultiplier: Float?
+    var widthToElementOffset: Float?
     
     var heightConstant: Float?
     
@@ -52,8 +54,10 @@ open class BaseElementMaker<TElement: Element> {
         return self
     }
     
-    public func width(toElement elemnt: Element) -> Self {
+    public func width(toElement elemnt: Element, widthToElementMultiplier: Float? = nil, widthToElementOffset: Float? = nil) -> Self {
         self.widthToElement = elemnt
+        self.widthToElementMultiplier = widthToElementMultiplier
+        self.widthToElementOffset = widthToElementOffset
         return self
     }
     
@@ -143,6 +147,8 @@ open class ElementMaker<TElement: ElementView & Element>: BaseElementMaker<TElem
         }
         
         element.proxy.widthToElement = widthToElement
+        element.proxy.widthToElementMultiplier = widthToElementMultiplier
+        element.proxy.widthToElementOffset = widthToElementOffset
         
         if let heightConstant = heightConstant {
             element.height = heightConstant

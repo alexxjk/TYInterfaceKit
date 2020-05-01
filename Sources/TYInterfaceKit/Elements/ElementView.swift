@@ -245,7 +245,12 @@ extension ElementView {
             if let widthConstant = element.proxy.widthToSet {
                 element.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(widthConstant)).isActive = true
             }
-            element.widthAnchor.constraint(lessThanOrEqualTo: widthToElement.widthAnchor, multiplier: 1, constant: -(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)).isActive = true
+            let widthConstant = CGFloat(element.proxy.widthToElementOffset ?? Float(-(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)))
+            element.widthAnchor.constraint(
+                lessThanOrEqualTo: widthToElement.widthAnchor,
+                multiplier: CGFloat(element.proxy.widthToElementMultiplier ?? 1),
+                constant: widthConstant
+            ).isActive = true
         } else {
             if let widthConstant = element.proxy.widthToSet {
                 element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant)).isActive = true
@@ -267,7 +272,12 @@ extension ElementView {
             if let widthConstant = element.proxy.widthToSet {
                 element.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(widthConstant)).isActive = true
             }
-            element.widthAnchor.constraint(lessThanOrEqualTo: widthToElement.widthAnchor, multiplier: 1, constant: -(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)).isActive = true
+            let widthConstant = CGFloat(element.proxy.widthToElementOffset ?? Float(-(widthToElement.directionalLayoutMargins.leading + widthToElement.directionalLayoutMargins.trailing)))
+            element.widthAnchor.constraint(
+                lessThanOrEqualTo: widthToElement.widthAnchor,
+                multiplier: CGFloat(element.proxy.widthToElementMultiplier ?? 1),
+                constant: widthConstant
+            ).isActive = true
         } else {
             if let widthConstant = element.proxy.widthToSet {
                 element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant)).isActive = true
