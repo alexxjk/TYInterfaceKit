@@ -25,7 +25,7 @@ public final class SliderElementMaker<TSextantElement: SliderElementDefault>: El
     
     private var progressColor: UIColor?
     
-    override init() {
+    public override init() {
         super.init()
     }
     
