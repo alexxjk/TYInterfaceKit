@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SliderElement: Element {
+public protocol SliderElement: Element {
     
     var props: ScoreTrackerElementProps? { get set }
     
@@ -19,7 +19,7 @@ protocol SliderElement: Element {
 
 }
 
-class SliderElementDefault: ElementView, SliderElement {
+public class SliderElementDefault: ElementView, SliderElement {
     
     private var backgroundColorOnAppearing: UIColor?
     
@@ -40,15 +40,15 @@ class SliderElementDefault: ElementView, SliderElement {
     
     var wrappedInContainer: Bool = true
     
-    var doOnValueChanged: ((_ value: Float) -> Void)?
+    public var doOnValueChanged: ((_ value: Float) -> Void)?
     
-    var doOnValueChanging: ((_ value: Float) -> Void)?
+    public var doOnValueChanging: ((_ value: Float) -> Void)?
     
-    var doOnInteractionStarted: (() -> Void)?
+    public var doOnInteractionStarted: (() -> Void)?
     
     var doOnInteractionEnded: (() -> Void)?
     
-    var props: ScoreTrackerElementProps? {
+    public var props: ScoreTrackerElementProps? {
         didSet {
             guard props != oldValue else {
                 return
@@ -67,18 +67,18 @@ class SliderElementDefault: ElementView, SliderElement {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setup() {
+    override public func setup() {
         super.setup()
         setupElements()
     }
     
-    override func doOnAppeared() {
+    override public func doOnAppeared() {
         super.doOnAppeared()
         updateThumb()
         thumpLeft = thumb.pin(for: .centerLeading)
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         updateThumb()
     }
@@ -247,6 +247,6 @@ class SliderElementDefault: ElementView, SliderElement {
     }
 }
 
-struct ScoreTrackerElementProps: Equatable {
+public struct ScoreTrackerElementProps: Equatable {
     let score: Float
 }
