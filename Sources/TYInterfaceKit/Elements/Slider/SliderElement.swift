@@ -9,7 +9,7 @@ import UIKit
 
 public protocol SliderElement: Element {
     
-    var props: ScoreTrackerElementProps? { get set }
+    var props: SliderElementProps? { get set }
     
     var doOnValueChanged: ((_ value: Float) -> Void)? { get }
     
@@ -48,7 +48,7 @@ public class SliderElementDefault: ElementView, SliderElement {
     
     var doOnInteractionEnded: (() -> Void)?
     
-    public var props: ScoreTrackerElementProps? {
+    public var props: SliderElementProps? {
         didSet {
             guard props != oldValue else {
                 return
@@ -87,7 +87,7 @@ public class SliderElementDefault: ElementView, SliderElement {
         guard let props = props else {
             return
         }
-        let newOffset = offset(fromValue: props.score)
+        let newOffset = offset(fromValue: props.value)
         totalProgress.update(pin: .leading())
         totalProgress.update(pin: .trailing())
         thumb.update(pin: Pin(toElement: totalProgress, type: .centerLeading, offset: newOffset))
@@ -121,7 +121,7 @@ public class SliderElementDefault: ElementView, SliderElement {
         thumpLeft = thumb.update(pin: Pin(
             toElement: totalProgress,
             type: .centerLeading,
-            offset: offset(fromValue: props?.score ?? 0)
+            offset: offset(fromValue: props?.value ?? 0)
         ))
         thumb.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleThumbPan(_:))))
         
@@ -141,7 +141,7 @@ public class SliderElementDefault: ElementView, SliderElement {
                 min(thumpLeft.offset + Float(translation.x), totalProgress.width - progressBarPadding)
             )
             let value = (offset - progressBarPadding) / (totalProgress.width - 2 * progressBarPadding)
-            props = ScoreTrackerElementProps(score: value)
+            props = SliderElementProps(value: value)
             doOnValueChanging?(value)
         case .ended:
             isInInteractionState = false
@@ -247,10 +247,10 @@ public class SliderElementDefault: ElementView, SliderElement {
     }
 }
 
-public struct ScoreTrackerElementProps: Equatable {
-    public let score: Float
+public struct SliderElementProps: Equatable {
+    public let value: Float
     
-    public init(score: Float) {
-        self.score = score
+    public init(value: Float) {
+        self.value = value
     }
 }
