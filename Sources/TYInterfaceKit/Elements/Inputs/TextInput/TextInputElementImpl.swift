@@ -30,6 +30,7 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
                 handleValueChanged()
             }
             field.text = newValue
+            updateAccesories()
         }
     }
     
@@ -206,7 +207,10 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
     
     private func handleValueChanged() {
         shouldFireOnValueChanged = true
-        
+        updateAccesories()
+    }
+    
+    private func updateAccesories() {
         let isValueEmpty = self.value?.isEmpty ?? true
         UIView.animate(withDuration: 0.1, delay: 0, options: [.curveEaseOut], animations: {
             self.actionButton.isHidden = isValueEmpty
