@@ -248,5 +248,9 @@ public class SliderElementDefault: ElementView, SliderElement {
 }
 
 public struct ScoreTrackerElementProps: Equatable {
-    let score: Float
+    public let score: Float
+    
+    public init(score: Float) {
+        self.score = score
+    }
 }
