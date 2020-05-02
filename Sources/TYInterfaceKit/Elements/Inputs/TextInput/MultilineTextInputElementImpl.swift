@@ -95,6 +95,13 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
         field.becomeFirstResponder()
     }
     
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let text = replace(currentText: textView.text, replacementString: text, textRange: range)
+        textView.text = text
+        handleValueChanged()
+        return false
+    }
+    
     private func setupElements() {
         
 
