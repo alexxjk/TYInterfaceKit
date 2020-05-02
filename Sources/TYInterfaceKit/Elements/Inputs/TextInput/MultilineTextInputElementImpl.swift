@@ -18,10 +18,11 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
         get {
             return field.text
         } set {
-            if field.text != newValue {
+            let oldValue = field.text
+            field.text = newValue
+            if oldValue != newValue {
                 handleValueChanged()
             }
-            field.text = newValue
         }
     }
     
