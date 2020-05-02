@@ -15,7 +15,14 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
     private let placeholder = UILabel()
     
     public var value: String? {
-        return field.text
+        get {
+            return field.text
+        } set {
+            if field.text != newValue {
+                handleValueChanged()
+            }
+            field.text = newValue
+        }
     }
     
     public var textStyleFactory: TextStyleBuilder = .default() {

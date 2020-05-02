@@ -9,7 +9,7 @@ import UIKit
 
 public protocol TextInputElement: Input {
     
-    var value: String? { get }
+    var value: String? { get set }
     
     var textStyleFactory: TextStyleBuilder { get set }
     

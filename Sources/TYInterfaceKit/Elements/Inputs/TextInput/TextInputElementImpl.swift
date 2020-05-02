@@ -23,7 +23,14 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
     private let actionButton = IconButtonElementImpl(configurator: ElementViewConfigurator())
     
     public var value: String? {
-        return field.text
+        get {
+            return field.text
+        } set {
+            if field.text != newValue {
+                handleValueChanged()
+            }
+            field.text = newValue
+        }
     }
     
     public var textStyleFactory: TextStyleBuilder = .default() {
