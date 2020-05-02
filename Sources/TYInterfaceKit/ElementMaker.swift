@@ -9,11 +9,11 @@ import UIKit
 
 open class BaseElementMaker<TElement: Element> {
     
+    public var backgroundColor: UIColor?
+    
     var opacity: Float = 1
     
     var scale: ScaleFactor = .one
-    
-    var backgroundColor: UIColor?
     
     var borders: ElementBorder?
     
