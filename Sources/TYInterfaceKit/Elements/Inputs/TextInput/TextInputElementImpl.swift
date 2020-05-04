@@ -201,11 +201,11 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         guard let allowedCharacters = allowedCharacters else {
             return string
         }
-        let charSet = CharacterSet(charactersIn: allowedCharacters)
-        if string.rangeOfCharacter(from: charSet) != nil {
-            return ""
+        var filteredString = string
+        allowedCharacters.map {String($0) }.forEach {
+            filteredString = filteredString.replacingOccurrences(of: $0, with: "")
         }
-        return string
+        return filteredString
     }
     
     private func replace(currentText: String?, replacementString: String, textRange: NSRange) -> String? {
