@@ -110,8 +110,10 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
             return string
         }
         var filteredString = string
-        allowedCharacters.map {String($0) }.forEach {
-            filteredString = filteredString.replacingOccurrences(of: $0, with: "")
+        string.map { String($0) }.forEach {
+            if !allowedCharacters.contains($0) {
+                filteredString = filteredString.replacingOccurrences(of: $0, with: "")
+            }
         }
         return filteredString
     }

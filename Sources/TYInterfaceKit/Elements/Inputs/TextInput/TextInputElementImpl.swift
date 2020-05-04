@@ -202,8 +202,10 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
             return string
         }
         var filteredString = string
-        allowedCharacters.map {String($0) }.forEach {
-            filteredString = filteredString.replacingOccurrences(of: $0, with: "")
+        string.map { String($0) }.forEach {
+            if !allowedCharacters.contains($0) {
+                filteredString = filteredString.replacingOccurrences(of: $0, with: "")
+            }
         }
         return filteredString
     }
@@ -215,7 +217,7 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         guard let textRange = Range(textRange, in: currentText) else {
             return currentText
         }
-        var filteredString = filter(string: replacementString)
+        let filteredString = filter(string: replacementString)
         return currentText.replacingCharacters(in: textRange, with: filteredString)
     }
     
