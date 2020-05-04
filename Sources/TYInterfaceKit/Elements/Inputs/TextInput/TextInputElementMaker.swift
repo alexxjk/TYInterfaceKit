@@ -15,6 +15,8 @@ open class TextInputElementMakerBase<TElement: ElementView & TextInputElement>: 
     
     private var textStyleFactory: TextStyleBuilder = .default()
     
+    private var allowedCharacters: String?
+    
     public override init() { }
     
     public func placeholderText(_ placeholderText: String?) -> Self {
@@ -32,10 +34,16 @@ open class TextInputElementMakerBase<TElement: ElementView & TextInputElement>: 
         return self
     }
     
+    public func allowedCharacters(_ allowedCharacters: String?) -> Self {
+        self.allowedCharacters = allowedCharacters
+        return self
+    }
+    
     open override func make() -> TElement {
         let element = super.make()
         element.placeholderText = placeholderText
         element.textStyleFactory = textStyleFactory
+        element.allowedCharacters = allowedCharacters
         element.tintColor = tintColor
         element.doOnValueChanged = valueChanged
         return element

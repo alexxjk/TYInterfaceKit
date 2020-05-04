@@ -11,6 +11,8 @@ public protocol TextInputElement: Input {
     
     var value: String? { get set }
     
+    var allowedCharacters: String? { get set }
+    
     var textStyleFactory: TextStyleBuilder { get set }
     
     var placeholderText: String? { get set }

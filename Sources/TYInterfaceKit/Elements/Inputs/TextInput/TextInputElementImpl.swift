@@ -40,6 +40,8 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         }
     }
     
+    public var allowedCharacters: String?
+    
     var clearButtonIcon: UIImage? {
         didSet {
             setupElements()
@@ -195,6 +197,17 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         return false
     }
     
+    private func filter(string: String) -> String {
+        guard let allowedCharacters = allowedCharacters else {
+            return string
+        }
+        let charSet = CharacterSet(charactersIn: allowedCharacters)
+        if string.rangeOfCharacter(from: charSet) != nil {
+            return ""
+        }
+        return string
+    }
+    
     private func replace(currentText: String?, replacementString: String, textRange: NSRange) -> String? {
         guard let currentText = currentText else {
             return nil
@@ -202,7 +215,8 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         guard let textRange = Range(textRange, in: currentText) else {
             return currentText
         }
-        return currentText.replacingCharacters(in: textRange, with: replacementString)
+        var filteredString = filter(string: replacementString)
+        return currentText.replacingCharacters(in: textRange, with: filteredString)
     }
     
     private func handleValueChanged() {

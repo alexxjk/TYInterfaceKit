@@ -44,6 +44,8 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
         }
     }
     
+    public var allowedCharacters: String?
+
     public override var corners: CornerRadius {
         didSet {
             field.layer.cornerRadius = CGFloat(corners.value)
@@ -96,14 +98,25 @@ open class MultilineTextInputElementImpl: ElementView, TextInputElement, UITextV
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let text = replace(currentText: textView.text, replacementString: text, textRange: range)
+        let filteredString = filter(string: text)
+        let text = replace(currentText: textView.text, replacementString: filteredString, textRange: range)
         textView.text = text
         handleValueChanged()
         return false
     }
     
+    private func filter(string: String) -> String {
+        guard let allowedCharacters = allowedCharacters else {
+            return string
+        }
+        let charSet = CharacterSet(charactersIn: allowedCharacters)
+        if string.rangeOfCharacter(from: charSet) != nil {
+            return ""
+        }
+        return string
+    }
+    
     private func setupElements() {
-        
 
         subviews.forEach {
             $0.removeFromSuperview()
