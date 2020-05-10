@@ -12,6 +12,8 @@ public protocol HStackElement: ContainerElement {
     var spacing: Float { get set }
     
     var leadingPadding: Float { get set }
+    
+    var distribution: UIStackView.Distribution { get set }
 }
 
 

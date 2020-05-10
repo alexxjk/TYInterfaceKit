@@ -29,6 +29,15 @@ public class HStackElementDefault: ElementView, HStackElement {
         }
     }
     
+    public var distribution: UIStackView.Distribution {
+        set {
+            stack.distribution = distribution
+        }
+        get {
+            return stack.distribution
+        }
+    }
+    
     public var leadingPadding: Float = 0
     
     public required init(configurator: ElementViewConfigurator) {

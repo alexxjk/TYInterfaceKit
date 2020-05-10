@@ -13,6 +13,8 @@ open class HStackElementMaker<TElement: HStackElementDefault>: ElementMaker<TEle
     
     private var leadingPadding: Float = 0
     
+    private var distribution: UIStackView.Distribution?
+    
     open override var configurator: ElementViewConfigurator {
         return ElementViewConfigurator(preservesSuperviewLayoutMargins: true)
     }
@@ -27,12 +29,20 @@ open class HStackElementMaker<TElement: HStackElementDefault>: ElementMaker<TEle
         return self
     }
     
+    public func distribution(_ distribution: UIStackView.Distribution) -> Self {
+        self.distribution = distribution
+        return self
+    }
+    
     public override init() { }
     
     public override func make() -> TElement {
         let element = super.make()
         element.spacing = spacing
         element.leadingPadding = leadingPadding
+        if let distribution = distribution {
+            element.distribution = distribution
+        }
         return element
     }
 }
