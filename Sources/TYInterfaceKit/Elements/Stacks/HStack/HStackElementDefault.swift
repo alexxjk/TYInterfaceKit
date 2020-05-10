@@ -31,7 +31,7 @@ public class HStackElementDefault: ElementView, HStackElement {
     
     public var distribution: UIStackView.Distribution {
         set {
-            stack.distribution = distribution
+            stack.distribution = newValue
         }
         get {
             return stack.distribution
