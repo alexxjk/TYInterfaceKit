@@ -42,6 +42,8 @@ public class HStackElementDefault: ElementView, HStackElement {
     
     public required init(configurator: ElementViewConfigurator) {
         super.init(configurator: configurator)
+        stack.distribution = .fill
+        stack.spacing = CGFloat(spacing)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -52,8 +54,6 @@ public class HStackElementDefault: ElementView, HStackElement {
         func setupStack() {
             stack.translatesAutoresizingMaskIntoConstraints = false
             stack.axis = .horizontal
-            stack.distribution = .fill
-            stack.spacing = CGFloat(spacing)
             //stack.layoutMargins = .zero
             stack.directionalLayoutMargins = .zero
             stack.preservesSuperviewLayoutMargins = preservesSuperviewLayoutMargins
