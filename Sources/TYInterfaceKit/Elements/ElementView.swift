@@ -226,14 +226,7 @@ extension ElementView {
     public func addElement<TElement: Element>(maker: () -> ControlMaker<TElement>) -> TElement {
         let maker = maker()
         let element = maker.make()
-        children.append(element)
-        if let contentView = contentView {
-            contentView.addSubview(element)
-        } else {
-            addSubview(element)
-        }
-        setPins(forElment: element)
-        element.setup()
+        addElement(element: element)
         maker.doOnAdded(element)
         return element
     }
