@@ -194,6 +194,18 @@ open class ElementView: UIView, Element {
         setPins(forElment: element)
         
     }
+    
+    func addElement(element: ElementControl) {
+        children.append(element)
+        if let contentView = contentView {
+            contentView.addSubview(element)
+        } else {
+            addSubview(element)
+        }
+        element.setup()
+        setPins(forElment: element)
+        
+    }
 }
 
 

@@ -91,5 +91,17 @@ public class VStackElementImpl: ElementView, VStackElement {
         stack.addArrangedSubview(element)
         element.setup()
     }
+    
+    override func addElement(element: ElementControl) {
+        if let heightConstant = element.proxy.heightToSet {
+            let heightConstraint = element.heightAnchor.constraint(equalToConstant: CGFloat(heightConstant))
+            heightConstraint.priority = .defaultHigh
+            heightConstraint.isActive = true
+        }
+
+        children.append(element)
+        stack.addArrangedSubview(element)
+        element.setup()
+    }
 }
 
