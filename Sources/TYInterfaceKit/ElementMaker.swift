@@ -190,6 +190,10 @@ open class ControlMaker<TElement: ElementControl & Control>: BaseElementMaker<TE
             element.width = widthConstant
         }
         
+        element.proxy.widthToElement = widthToElement
+        element.proxy.widthToElementMultiplier = widthToElementMultiplier
+        element.proxy.widthToElementOffset = widthToElementOffset
+        
         if let heightConstant = heightConstant {
             element.height = heightConstant
         }
