@@ -173,7 +173,7 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         addSubview(field)
         let fieldConstraints = [
             field.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            field.trailingAnchor.constraint(lessThanOrEqualTo: actionButton.leadingAnchor, constant: -10),
+            field.trailingAnchor.constraint(equalTo: actionButton.leadingAnchor, constant: -10),
             field.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
             icon != nil ?
                 field.leadingAnchor.constraint(equalTo: iconHolder.trailingAnchor, constant: 12) :
