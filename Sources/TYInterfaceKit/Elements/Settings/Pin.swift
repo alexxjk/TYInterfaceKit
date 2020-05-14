@@ -65,6 +65,8 @@ public struct Pin: Hashable {
         case baseline
         
         case centerBottom
+        
+        case trailingFloatingLeading
     }
     
     public static func == (lhs: Pin, rhs: Pin) -> Bool {
@@ -126,6 +128,21 @@ public extension Pin {
     }
     
     static func trailing(
+        toElement: Element? = nil,
+        offset: Float = 0,
+        respectingSafeArea: Bool = true,
+        respectingLayuMargings: Bool = true
+    ) -> Pin {
+        return Pin(
+            toElement: toElement,
+            type: .trailing,
+            offset: offset,
+            respectingSafeArea: respectingSafeArea,
+            respectingLayuMargings: respectingLayuMargings
+        )
+    }
+    
+    static func trailingFloatingleading(
         toElement: Element? = nil,
         offset: Float = 0,
         respectingSafeArea: Bool = true,

@@ -335,6 +335,11 @@ final class ElementViewProxy {
                     equalTo: anchor.anchrElement.bottomAnchor,
                     constant: invertOffset(for: pin, and: element)
                 )
+            case .trailingFloatingLeading:
+                return element.trailingAnchor.constraint(
+                    lessThanOrEqualTo: layoutGuideForElement?.trailingAnchor ?? anchorElement.trailingAnchor,
+                    constant: invertOffset(for: pin, and: element)
+                )
             }
         }()
         if let priority = pin.priority {
@@ -366,7 +371,7 @@ final class ElementViewProxy {
         
         let anchor = anchorElement(for: pin, and: element)
         switch pin.type {
-        case .trailing, .bottom:
+        case .trailing, .bottom, .trailingFloatingLeading:
             return anchor.pinnedToSuperview ? -CGFloat(pin.offset) : CGFloat(pin.offset)
         case .trailingLeading:
             return -CGFloat(pin.offset)
