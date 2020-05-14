@@ -150,7 +150,7 @@ public extension Pin {
     ) -> Pin {
         return Pin(
             toElement: toElement,
-            type: .trailing,
+            type: .trailingFloatingLeading,
             offset: offset,
             respectingSafeArea: respectingSafeArea,
             respectingLayuMargings: respectingLayuMargings
