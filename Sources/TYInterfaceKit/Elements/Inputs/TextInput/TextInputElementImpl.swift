@@ -66,6 +66,13 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         }
     }
     
+    private var cursorPositionIndex: Int {
+        if let range = field.selectedTextRange {
+            return field.offset(from: field.beginningOfDocument, to: range.start)
+        }
+        return field.text?.count ?? 0
+    }
+    
     public var doOnValueChanged: (() -> Void)?
     
     public required init(configurator: ElementViewConfigurator) {
@@ -191,8 +198,10 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
+        let cursorPos = cursorPositionIndex
         let text = replace(currentText: textField.text, replacementString: string, textRange: range)
         textField.text = text
+        let newCursorPosIndex = string.count > 0 ? cursorPos + string.count : cursorPos - 1
         handleValueChanged()
         return false
     }
