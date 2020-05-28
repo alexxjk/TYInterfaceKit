@@ -202,6 +202,7 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
         let text = replace(currentText: textField.text, replacementString: string, textRange: range)
         textField.text = text
         let newCursorPosIndex = string.count > 0 ? cursorPos + string.count : cursorPos - 1
+        setCursorPosition(newCursorPosIndex)
         handleValueChanged()
         return false
     }
@@ -241,6 +242,13 @@ open class TextInputElementImpl: ElementView, SinglelineTextInputElement, UIText
             self.actionButton.isHidden = isValueEmpty
             self.placeholder.alpha = isValueEmpty ? 0.7 : 0
         })
+    }
+    
+    private func setCursorPosition(_ positionIndex: Int) {
+        guard let position = field.position(from: field.beginningOfDocument, offset: positionIndex) else {
+            return
+        }
+        field.selectedTextRange = field.textRange(from: position, to: position)
     }
     
     @objc private func doOnClearTap() {
