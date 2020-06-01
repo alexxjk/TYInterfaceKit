@@ -213,8 +213,8 @@ open class ElementControl: UIControl, Control {
         let largerArea = CGRect(
             x: bounds.origin.x - horizontalInsets,
             y: bounds.origin.y - verticalInsets,
-            width: bounds.width + 2.0 * horizontalInsets,
-            height: bounds.height + 2.0 * verticalInsets
+            width: max(bounds.width + 2.0 * horizontalInsets, bounds.width),
+            height: max(bounds.height + 2.0 * verticalInsets, bounds.height)
         )
 
         return largerArea.contains(point)
