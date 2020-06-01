@@ -207,14 +207,14 @@ open class ElementControl: UIControl, Control {
         if bounds.width >= minSize && bounds.height >= minSize {
             return super.point(inside: point, with: event)
         }
-        let verticalInsets = (minSize - bounds.height) / 2.0
-        let horizontalInsets = (minSize - bounds.width) / 2.0
+        let verticalInsets = bounds.height >= 44 ? 0 : (minSize - bounds.height) / 2.0
+        let horizontalInsets = bounds.width >= 44 ? 0 : (minSize - bounds.width) / 2.0
 
         let largerArea = CGRect(
             x: bounds.origin.x - horizontalInsets,
             y: bounds.origin.y - verticalInsets,
-            width: max(bounds.width + 2.0 * horizontalInsets, bounds.width),
-            height: max(bounds.height + 2.0 * verticalInsets, bounds.height)
+            width: bounds.width + 2.0 * horizontalInsets,
+            height: bounds.height + 2.0 * verticalInsets
         )
 
         return largerArea.contains(point)
