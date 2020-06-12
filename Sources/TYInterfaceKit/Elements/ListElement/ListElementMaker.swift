@@ -25,6 +25,8 @@ open class ListElementMaker<TItem, TItemElement, TLoadingItem, TListElement: Lis
     
     private let autoSize: Bool
     
+    private var horizontalWidthCoef: CGFloat?
+    
     public override var configurator: ElementViewConfigurator {
         return ListElementViewConfigurator(axis: axis, alwaysBounce: alwaysBounce, preservesSuperviewLayoutMargins: true, autoSize: autoSize)
     }
@@ -47,6 +49,7 @@ open class ListElementMaker<TItem, TItemElement, TLoadingItem, TListElement: Lis
         elemnt.doOnScroll = offsetChanged
         elemnt.doOnItemSelected = itemSelected
         elemnt.doOnScrolledToEnd = scrolledToEnd
+        elemnt.horizontalWidthCoef = horizontalWidthCoef ?? 0.67
         return elemnt
     }
     
@@ -57,6 +60,11 @@ open class ListElementMaker<TItem, TItemElement, TLoadingItem, TListElement: Lis
     
     public func spacing(_ spacing: Float) -> Self {
         self.spacing = spacing
+        return self
+    }
+    
+    public func horizontalWidthCoef(_ horizontalWidthCoef: CGFloat) -> Self {
+        self.horizontalWidthCoef = horizontalWidthCoef
         return self
     }
     

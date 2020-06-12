@@ -37,6 +37,8 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     
     open var spacing: Float = 16
     
+    open var horizontalWidthCoef: CGFloat = 0.67
+    
     open var animateOnReloading: Bool {
         return true
     }
@@ -217,6 +219,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
         
         func setupCollectionView() {
             let flowLayout = configurator.axis == .vertical ? VerticalFlowLayout() : (configurator.autoSize ? HorizontalAutoWidthFlowLayout() : HorizontalFlowLayout())
+            (flowLayout as? HorizontalFlowLayout)?.widthCoef = horizontalWidthCoef
             flowLayout.scrollDirection = configurator.axis == .vertical ? .vertical : .horizontal
             if configurator.axis == .vertical {
                 flowLayout.minimumLineSpacing = CGFloat(spacing)
@@ -437,6 +440,8 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
     
     private class HorizontalFlowLayout: UICollectionViewFlowLayout {
         
+        var widthCoef: CGFloat!
+        
         override init() {
             super.init()
             estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -454,7 +459,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             }
             let collectionViewWidth = collectionView.frame.width - sectionInset.left - sectionInset.right - collectionView.contentInset.left - collectionView.contentInset.right - 0.5
             let totalWidth = collectionViewWidth - minimumLineSpacing
-            layoutAttributes.bounds.size.width = totalWidth * 0.67
+            layoutAttributes.bounds.size.width = totalWidth * widthCoef
             return layoutAttributes
         }
 

@@ -16,6 +16,8 @@ public protocol ListElement: Element {
     
     var spacing: Float { get }
     
+    var horizontalWidthCoef: CGFloat { get }
+    
     var animateOnReloading: Bool { get }
     
     var doOnScroll: ((_ offset: Float) -> Void)? { get }
