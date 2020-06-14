@@ -31,6 +31,8 @@ open class BaseElementMaker<TElement: Element> {
     
     var heightConstant: Float?
     
+    var heightToWidthMultiplier: Float?
+    
     var tintColor: UIColor?
     
     open var configurator: ElementViewConfigurator {
@@ -58,6 +60,11 @@ open class BaseElementMaker<TElement: Element> {
         self.widthToElement = elemnt
         self.widthToElementMultiplier = widthToElementMultiplier
         self.widthToElementOffset = widthToElementOffset
+        return self
+    }
+    
+    public func heightToWdith(withMultiplier multiplier: Float? = 1) -> Self {
+        self.heightToWidthMultiplier = multiplier
         return self
     }
     
@@ -149,6 +156,8 @@ open class ElementMaker<TElement: ElementView & Element>: BaseElementMaker<TElem
         element.proxy.widthToElement = widthToElement
         element.proxy.widthToElementMultiplier = widthToElementMultiplier
         element.proxy.widthToElementOffset = widthToElementOffset
+        
+        element.proxy.heightToWidthMultiplier = heightToWidthMultiplier
         
         if let heightConstant = heightConstant {
             element.height = heightConstant

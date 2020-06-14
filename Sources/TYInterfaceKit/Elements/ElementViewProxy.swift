@@ -28,6 +28,8 @@ final class ElementViewProxy {
     
     var heightToSet: Float?
     
+    var heightToWidthMultiplier: Float?
+    
     init(view: UIView) {
         self.view = view
     }

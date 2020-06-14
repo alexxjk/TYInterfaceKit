@@ -262,10 +262,14 @@ extension ElementView {
             }
         }
         
-        if let heightConstant = element.proxy.heightToSet {
-            let heightConstraint = element.heightAnchor.constraint(equalToConstant: CGFloat(heightConstant))
-            heightConstraint.priority = .defaultHigh
-            heightConstraint.isActive = true
+        if let heightToWidthMultiplier = element.proxy.heightToWidthMultiplier {
+            element.heightAnchor.constraint(equalTo: element.widthAnchor, multiplier: CGFloat(heightToWidthMultiplier)).isActive = true
+        } else {
+            if let heightConstant = element.proxy.heightToSet {
+                let heightConstraint = element.heightAnchor.constraint(equalToConstant: CGFloat(heightConstant))
+                heightConstraint.priority = .defaultHigh
+                heightConstraint.isActive = true
+            }
         }
         
         NSLayoutConstraint.activate(element.pins.map { proxy.constraint(for: element, and: $0) })
