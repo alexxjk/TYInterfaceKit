@@ -459,7 +459,7 @@ open class ListElementImpl<TItem: Equatable, TItemElement: ListItemElementImpl<T
             }
             let collectionViewWidth = collectionView.frame.width - sectionInset.left - sectionInset.right - collectionView.contentInset.left - collectionView.contentInset.right - 0.5
             let totalWidth = collectionViewWidth - minimumLineSpacing
-            layoutAttributes.bounds.size.width = totalWidth * widthCoef
+            layoutAttributes.bounds.size.width = totalWidth / 2.0
             return layoutAttributes
         }
 
