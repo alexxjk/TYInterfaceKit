@@ -43,6 +43,7 @@ public class HStackElementDefault: ElementView, HStackElement {
     public required init(configurator: ElementViewConfigurator) {
         super.init(configurator: configurator)
         stack.distribution = .fill
+        stack.alignment = .top
         stack.spacing = CGFloat(spacing)
     }
     
