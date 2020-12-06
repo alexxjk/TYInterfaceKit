@@ -95,6 +95,12 @@ public class HStackElementDefault: ElementView, HStackElement {
             widthConstraint.priority = .defaultHigh
             widthConstraint.isActive = true
         }
+        
+        if let heightConstant = element.proxy.heightToSet {
+            let heightConstraint = element.heightAnchor.constraint(equalToConstant: CGFloat(heightConstant))
+            heightConstraint.priority = .defaultHigh
+            heightConstraint.isActive = true
+        }
 
         children.append(element)
         stack.addArrangedSubview(element)
