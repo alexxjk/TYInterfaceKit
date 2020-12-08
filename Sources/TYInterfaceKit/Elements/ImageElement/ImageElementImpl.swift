@@ -64,6 +64,7 @@ open class ImageElementImpl: ElementView, ImageElement {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
             imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+            imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             addSubview(imageView)
             let bc = imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
             bc.priority = .defaultLow
