@@ -107,5 +107,23 @@ public class HStackElementDefault: ElementView, HStackElement {
         stack.addArrangedSubview(element)
         element.setup()
     }
+    
+    override func addElement(element: ElementControl) {
+        if let widthConstant = element.proxy.widthToSet {
+            let widthConstraint = element.widthAnchor.constraint(equalToConstant: CGFloat(widthConstant))
+            widthConstraint.priority = .defaultHigh
+            widthConstraint.isActive = true
+        }
+        
+        if let heightConstant = element.proxy.heightToSet {
+            let heightConstraint = element.heightAnchor.constraint(equalToConstant: CGFloat(heightConstant))
+            heightConstraint.priority = .defaultHigh
+            heightConstraint.isActive = true
+        }
+
+        children.append(element)
+        stack.addArrangedSubview(element)
+        element.setup()
+    }
 }
 
