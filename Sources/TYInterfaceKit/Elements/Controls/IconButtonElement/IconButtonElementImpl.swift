@@ -31,10 +31,6 @@ open class IconButtonElementImpl: ElementControl, IconButtonElement {
         }
     }
     
-    open override var intrinsicContentSize: CGSize {
-        return imageView.frame.size
-    }
-    
     override open var tintColor: UIColor? {
         set {
             imageView.image = icon.withRenderingMode(.alwaysTemplate)
