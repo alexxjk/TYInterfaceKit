@@ -32,7 +32,7 @@ open class IconButtonElementImpl: ElementControl, IconButtonElement {
     }
     
     open override var intrinsicContentSize: CGSize {
-        return frame.size
+        return imageView.frame.size
     }
     
     override open var tintColor: UIColor? {
